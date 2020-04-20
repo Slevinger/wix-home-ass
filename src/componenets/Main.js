@@ -1,20 +1,27 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Input from "./Input";
 import { SettingsBoxContainer } from "./StyledComponents";
-import { createBoard } from "../api/minesSweeperApi";
 import Board from "./Board";
+import useBoard from "../hooks/useBoard";
 
 export default () => {
-  const [countMines, setCountMines] = useState(9);
-  const [countRows, setCountRows] = useState(8);
-  const [countCols, setCountCols] = useState(10);
+  const [countMines, setCountMines] = useState(20);
+  const [countRows, setCountRows] = useState(10);
+  const [countCols, setCountCols] = useState(13);
   const [superman, setSuperman] = useState(false);
-
-  const [board, setBoard] = useState(null);
-  useEffect(() => setBoard(createBoard(countRows, countCols, countMines)), []);
-  const createBoardCallback = useCallback(() => {
-    setBoard(createBoard(countRows, countCols, countMines));
-  }, [countCols, countRows, countMines]);
+  const boardHook = useBoard();
+  const {
+    createBoard,
+    getNeighborsCount,
+    state: { board }
+  } = boardHook;
+  useEffect(() => {
+    createBoard(countRows, countCols, countMines, getNeighborsCount);
+  }, []);
+  debugger;
+  if (board.length === 0) {
+    return null;
+  }
   console.log(board);
   return (
     <>
@@ -49,8 +56,17 @@ export default () => {
             setSuperman(!superman);
           }}
         />
+        <button
+          onClick={() => {
+            createBoard(countRows, countCols, countMines);
+          }}
+        >
+          New Game
+        </button>
       </SettingsBoxContainer>
-      {board && <Board {...board} superman={superman} />}
+      {board && (
+        <Board {...boardHook} countMines={countMines} superman={superman} />
+      )}
     </>
   );
 };

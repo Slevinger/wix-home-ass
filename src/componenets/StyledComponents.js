@@ -54,8 +54,12 @@ export const StyledBoard = styled.div`
   flex-direction: row;
   display: flex;
   flex-wrap: wrap;
+
+  width: ${({ countCols }) => countCols * 42}px;
+`;
+
+export const StyledBoardContainer = styled.div`
   position: absolute;
-  left: 40%;
+  left: 30%;
   top: 20%;
-  width: ${({ countCols }) => (countCols + 1) * 40}px;
 `;

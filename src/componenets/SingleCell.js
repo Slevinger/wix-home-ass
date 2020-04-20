@@ -1,34 +1,66 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { StyledCell } from "./StyledComponents";
-import { FaBomb } from "react-icons/fa";
-export default ({ indexes, value, id, count, superman }) => {
-  const [clicked, setClicked] = useState(false);
-
-  const cellValue = useMemo(() => {
-    if (superman || clicked) {
-      if (value) {
-        return <FaBomb />;
+import { FaBomb, FaFlag } from "react-icons/fa";
+export default React.forwardRef(
+  (
+    {
+      indexes,
+      value,
+      id,
+      count,
+      superman,
+      reveal,
+      clicked,
+      flagged,
+      clickCell,
+      toggleFlag
+    },
+    ref
+  ) => {
+    // const [clicked, setClicked] = useState(false);
+    const cellValue = useMemo(() => {
+      if (flagged) {
+        return <FaFlag color="red" />;
       } else {
-        debugger;
-        if (count > 0) {
-          return count;
+        if (superman || clicked) {
+          if (value) {
+            return <FaBomb />;
+          } else {
+            if (count > 0) {
+              return count;
+            }
+            return "";
+          }
         }
-        return "";
       }
-    }
-  }, [clicked, superman, value, count]);
-  return (
-    <StyledCell
-      onClick={() => {
-        setClicked(true);
-      }}
-      clicked={clicked}
-      id={id}
-      indexes={indexes}
-      value={value}
-      superman={superman}
-    >
-      {cellValue}
-    </StyledCell>
-  );
-};
+    }, [clicked, superman, value, count, flagged]);
+
+    const onClick = async e => {
+      debugger;
+      if (e.altKey) {
+        toggleFlag(indexes);
+      } else {
+        if (!clicked && !flagged) {
+          clickCell(indexes);
+          if (count === 0 && e !== false) {
+            reveal(indexes);
+          }
+        }
+      }
+    };
+
+    return (
+      <StyledCell
+        ref={ref}
+        onClick={onClick}
+        clicked={clicked}
+        id={id}
+        indexes={indexes}
+        value={clicked}
+        superman={superman}
+      >
+        {cellValue}
+      </StyledCell>
+    );
+  }
+);
