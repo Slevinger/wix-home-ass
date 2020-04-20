@@ -17,7 +17,11 @@ export default ({
         <div style={{ color: "red" }}>No More Flags</div>
       )}
 
-      <StyledBoard countCols={board[0].length} countRows={board.length}>
+      <StyledBoard
+        status={status}
+        countCols={board[0].length}
+        countRows={board.length}
+      >
         {Object.keys(map).map((indexes, index) => (
           <SingleCell
             endGame={endGame}

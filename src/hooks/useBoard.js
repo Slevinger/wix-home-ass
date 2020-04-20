@@ -64,8 +64,7 @@ export default () => {
     mines: {},
     board: [],
     clicked: {},
-    boaredRefs: {},
-    status: "game_on"
+    boaredRefs: {}
   });
 
   const clickCell = indexes => {

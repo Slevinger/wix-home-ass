@@ -54,12 +54,24 @@ export const StyledBoard = styled.div`
   flex-direction: row;
   display: flex;
   flex-wrap: wrap;
-
+  overflow:auto;
   width: ${({ countCols }) => countCols * (CELL_WIDTH + 2)}px;
+  ${({ status }) =>
+    status !== "GAME ON"
+      ? css`
+          pointer-events: none;
+          opacity: 0.6;
+        `
+      : ""}
+  }
 `;
 
 export const StyledBoardContainer = styled.div`
   position: absolute;
   left: 25%;
   top: 15%;
+  max-width: 800px;
+  max-height: 700px;
+  overflow: auto;
+  box-shadow: -5px -5px 5px;
 `;
