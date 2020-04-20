@@ -1,5 +1,3 @@
-import React from "react";
-
 export const posToString = (row, col) => `row:${row},col:${col}`;
 
 const Queue = () => {
@@ -34,6 +32,18 @@ export default class Board {
   map;
 
   neighbors;
+
+  board;
+
+  neighbors;
+
+  rows;
+
+  cols;
+
+  countMines;
+
+  clicked;
 
   constructor() {
     this.reset();
@@ -84,7 +94,6 @@ export default class Board {
     queue.push(startIndexes);
     while (!queue.isEmpty()) {
       const indexes = queue.pop();
-      console.log("visited", queue.getVisited());
 
       const neighbors = this.getListOfNeighbors(indexes);
 
@@ -120,7 +129,7 @@ export default class Board {
         cellsLeft--;
       }
     }
-    debugger;
+
     for (let i = 0; i < this.board.length; i++) {
       neighboard.push([]);
       for (let j = 0; j < this.board[i].length; j++) {
@@ -130,26 +139,15 @@ export default class Board {
         this.neighbors[indexesStr] = count;
       }
     }
-    debugger;
-
-    console.log(this.neighbors);
-
-    const boardRefs = Object.keys(this.map).reduce(
-      (acc, cellKey) => ({
-        ...acc,
-        [cellKey]: React.createRef()
-      }),
-      {}
-    );
 
     return {
       countMines,
+      status: "GAME ON",
       clicked: this.clicked,
       board: this.board,
       mines: this.mines,
       map: this.map,
-      neighbors: this.neighbors,
-      boardRefs
+      neighbors: this.neighbors
     };
   }
 }

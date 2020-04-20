@@ -1,37 +1,54 @@
-import React, { useReducer } from "react";
-import Board, { posToString } from "./helpers/Board";
+import { useReducer } from "react";
+import Board from "./helpers/Board";
 import pick from "lodash/pick";
-import { stat } from "fs";
+import difference from "lodash/difference";
+
+const checkIsFinished = (state, additinalCells) => {
+  const clicked = { ...state.clicked, ...additinalCells };
+  const notClicked = Object.keys(state.map).filter(
+    indexes => !clicked[indexes]
+  );
+  const addToState = {};
+  if (difference(notClicked, Object.keys(state.mines)).length === 0) {
+    addToState.status = "WON";
+    addToState.flagged = state.mines;
+  }
+  addToState.clicked = clicked;
+  return addToState;
+};
 
 const reducer = (state, { type, payload }) => {
+  let addToState;
   switch (type) {
     case "clickCell":
-      // debugger;
-      return { ...state, clicked: { ...state.clicked, [payload]: 1 } };
+      addToState = checkIsFinished(state, { [payload]: 1 });
+      return { ...state, ...addToState };
     case "flagCell":
-      // debugger;
-      return { ...state, flagged: { ...state.flagged, [payload]: 1 } };
+      const GAME_WON =
+        Object.keys({ ...state.flagged, [payload]: 1 }).filter(
+          key => state.mines[key]
+        ).length === state.countMines;
+      const status = GAME_WON ? { status: "WON" } : {};
+      return {
+        ...state,
+        ...status,
+        flagged: { ...state.flagged, [payload]: 1 }
+      };
     case "unFlagCell":
-      debugger;
       return {
         ...state,
         flagged: pick(
           state.flagged,
-          Object.keys(state.flagged).filter(key => key != payload)
+          Object.keys(state.flagged).filter(key => key !== payload)
         )
       };
     case "reset":
-      // debugger;
       return payload;
     case "reveal":
-      // debugger;
-      return { ...state, clicked: { ...state.clicked, ...payload } };
-    case "think":
-      // debugger;
-      return { ...state, thinking: true };
-    case "stopThink":
-      // debugger;
-      return { ...state, thinking: false };
+      addToState = checkIsFinished(state, payload);
+      return { ...state, ...addToState };
+    case "endGame":
+      return { ...state, status: payload };
     default:
       return state;
   }
@@ -48,7 +65,7 @@ export default () => {
     board: [],
     clicked: {},
     boaredRefs: {},
-    thinking: false
+    status: "game_on"
   });
 
   const clickCell = indexes => {
@@ -60,6 +77,10 @@ export default () => {
   };
   const unFlagCell = indexes => {
     dispatch({ type: "unFlagCell", payload: indexes });
+  };
+
+  const endGame = status => {
+    dispatch({ type: "endGame", payload: status });
   };
 
   const toggleFlag = indexes => {
@@ -81,14 +102,11 @@ export default () => {
   };
 
   const reset = async (rows, cols, countMines) => {
-    debugger;
-    await dispatch({ type: "think" });
     const newBoard = board.createBoard(rows, cols, countMines);
     await dispatch({
       type: "reset",
       payload: { ...newBoard, flagged: [] }
     });
-    dispatch({ type: "stopThink" });
   };
 
   return {
@@ -96,6 +114,7 @@ export default () => {
     clickCell,
     toggleFlag,
     reveal,
+    endGame,
     createBoard: reset
   };
 };
