@@ -15,9 +15,11 @@ export default () => {
     const countCells = state.height * state.width;
     let didClickAllOver = false;
     if (countCells - Object.keys(clicked).length === state.countMines) {
-      const notClicked = Object.keys(state.mines).filter(
-        indexes => !clicked[indexes]
+      const notClicked = difference(
+        Object.keys(clicked),
+        Object.keys(state.map)
       );
+
       didClickAllOver =
         difference(notClicked, Object.keys(state.mines)).length === 0;
     }
@@ -38,7 +40,7 @@ export default () => {
     dispatch({ type: "incFlaggedMinesCount" });
   };
 
-  const clickCell = indexes => {
+  const addCellToClickedMap = indexes => {
     if (state.map[indexes]) {
       endGame("LOSE");
     }
@@ -47,7 +49,7 @@ export default () => {
       reveal(indexes);
     }
 
-    dispatch({ type: "clickCell", payload: { indexes } });
+    dispatch({ type: "addCellToClickedMap", payload: { indexes } });
     _tryToWin({
       addOrRemoveFromFlagsCount: 0,
       additionalCells: { [indexes]: 1 }
@@ -112,7 +114,7 @@ export default () => {
 
   return {
     state,
-    clickCell,
+    addCellToClickedMap,
     setSuperman,
     endGame,
     toggleFlag,

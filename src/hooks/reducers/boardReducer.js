@@ -15,17 +15,10 @@ export const initialState = {
 
 export const reducer = (state, { type, payload }) => {
   switch (type) {
-    case "clickCell":
-      const { indexes: cellToClick } = payload;
-      return { ...state, clicked: { ...state.clicked, [cellToClick]: 1 } };
+    case "addCellToClickedMap":
+      const { indexes: clickedCell } = payload;
+      return { ...state, clicked: { ...state.clicked, [clickedCell]: 1 } };
 
-    case "flagCell":
-      const { indexes: cellToFlag } = payload;
-      return {
-        ...state,
-        countFlags: state.countFlags + 1,
-        flagged: { ...state.flagged, [cellToFlag]: 1 }
-      };
     case "decFlaggedMinesCount":
       return {
         ...state,
@@ -35,6 +28,13 @@ export const reducer = (state, { type, payload }) => {
       return {
         ...state,
         flaggedMinesCount: state.flaggedMinesCount + 1
+      };
+    case "flagCell":
+      const { indexes: cellToFlag } = payload;
+      return {
+        ...state,
+        countFlags: state.countFlags + 1,
+        flagged: { ...state.flagged, [cellToFlag]: 1 }
       };
 
     case "unFlagCell":
