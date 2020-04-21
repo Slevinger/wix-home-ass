@@ -88,7 +88,9 @@ export default () => {
   };
 
   const reveal = (row, col) => {
+    debugger;
     const listOfCellsToReaveal = traverseFrom(posToString(row, col), state);
+    debugger;
     dispatch({
       type: "reveal",
       payload: { listOfCellsToReaveal }
