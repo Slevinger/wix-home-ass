@@ -3,7 +3,7 @@ import React from "react";
 export default props => {
   const { status, flagged, countMines } = props;
   const minesLeft = countMines - (Object.keys(flagged).length || 0);
-  debugger;
+
   return (
     <div className="game-status-container">
       <div className="game-status">

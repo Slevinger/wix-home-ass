@@ -13,8 +13,8 @@ export default () => {
 
   return (
     <Main>
-      <GameStatus {...boardHook.state} />
       <SettingsBox {...boardHook} />
+      <GameStatus {...boardHook.state} />
       {board.length > 0 && <Board {...boardHook} />}
     </Main>
   );

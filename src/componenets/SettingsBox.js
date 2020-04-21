@@ -5,10 +5,9 @@ import Spinner from "react-bootstrap/Spinner";
 
 export default ({ state: { superman }, setSuperman, createBoard }) => {
   const [thinking, setThinking] = useState(false);
-  const [cols, setCols] = useState(10);
-  const [rows, setRows] = useState(10);
+  const [cols, setCols] = useState(40);
+  const [rows, setRows] = useState(40);
   const [mines, setMines] = useState(12);
-  debugger;
   useEffect(() => {
     createBoard(rows, cols, mines);
   }, []);

@@ -1,15 +1,16 @@
 import styled, { css } from "styled-components";
 
 const CELL_WIDTH = 28;
+const BOARD_CONTAINER_WIDTH = 800;
+const BOARD_CONTAINER_HEIGHT = 700;
 
 export const SettingsBoxContainer = styled.div`
-  flex-direction: column;
+  flex-row: column;
   display: flex;
+  justify-content: center;
   padding: 7px;
-  width: 250px;
-  position: absolute;
-  left: 50px;
-  top: 50px;
+  width: 100%;
+  height: 30px;
   background-color: rgba(0, 0, 0, 0.2);
 `;
 
@@ -25,10 +26,9 @@ export const LabelInputContainer = styled.div`
   font-size: 18px;
   line-height: 30px;
   text-align: center;
-  justify-content: space-between;
   align-items: center;
-
-  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
 `;
 
 export const StyledCell = styled.div`
@@ -62,6 +62,7 @@ export const StyledBoard = styled.div`
   flex-direction: row;
   display: flex;
   flex-wrap: wrap;
+  justify-self:center;
   overflow:auto;
   width: ${({ countCols }) => countCols * (CELL_WIDTH + 2)}px;
   ${({ status }) =>
@@ -75,13 +76,9 @@ export const StyledBoard = styled.div`
 `;
 
 export const StyledBoardContainer = styled.div`
-  position: absolute;
-  left: 25%;
-  top: 15%;
-  max-width: 800px;
-  max-height: 700px;
+  max-width: ${BOARD_CONTAINER_WIDTH}px;
+  max-height: ${BOARD_CONTAINER_HEIGHT}px;
   overflow: auto;
-  box-shadow: -5px -5px 5px;
 `;
 
 export const Main = styled.div`
@@ -89,7 +86,6 @@ export const Main = styled.div`
     text-align: center;
     justify-self: center;
     align-self: center;
-    position: fixed;
     width: 100%;
     padding: 10;
     font-size: 23px;
@@ -98,6 +94,7 @@ export const Main = styled.div`
     .game-status {
       background-color: rgba(255, 255, 255, 0.4);
       display: inline-flex;
+      position: fixed;
 
       .GAME_ON {
         color: blue;
@@ -112,4 +109,18 @@ export const Main = styled.div`
       }
     }
   }
+  .board-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+  }
+`;
+
+export const StyledScroller = styled.div`
+  position: absolute;
+  width: ${({ countCols }) =>
+    Math.min(countCols * (CELL_WIDTH + 2), BOARD_CONTAINER_WIDTH)}px;
+  height: ${({ countRows }) =>
+    Math.min(countRows * (CELL_WIDTH + 2), BOARD_CONTAINER_HEIGHT)}px;
 `;
