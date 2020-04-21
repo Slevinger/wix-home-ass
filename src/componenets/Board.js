@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyledBoard, StyledBoardContainer } from "./StyledComponents";
 import SingleCell from "./SingleCell";
-import Spinner from "react-bootstrap/Spinner";
 import Loading from "./Loading";
 
 export default ({
   state: {
     map,
     countMines,
+    countFlags,
     board,
     clicked,
     neighbors,
@@ -21,8 +21,7 @@ export default ({
   clickCell,
   reveal
 }) => {
-  const minesLeft = countMines - (Object.keys(flagged).length || 0);
-  const [cellWidth, setCellWidth] = useState(30);
+  const minesLeft = countMines - countFlags;
   return (
     <div className="board-page">
       {loading && <Loading />}
@@ -32,7 +31,6 @@ export default ({
         )}
 
         <StyledBoard
-          cellWidth={cellWidth}
           status={status}
           countCols={board[0].length}
           countRows={board.length}
