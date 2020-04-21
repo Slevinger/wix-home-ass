@@ -1,24 +1,45 @@
-export default () => {
+import React from "react";
+import { Grid } from "react-virtualized";
+import { posToString } from "../services/index";
+import SingleCell from "./SingleCell";
+
+export default boardHook => {
+  const {
+    state: {
+      map,
+      height: numRows,
+      width: numColumns,
+      clicked,
+      neighbors,
+      flagged,
+      superman
+    },
+    toggleFlag,
+    clickCell,
+    reveal
+  } = boardHook;
+
   return (
     <Grid
       cellRenderer={({ columnIndex, key, rowIndex, style }) => {
         const indexes = posToString(rowIndex, columnIndex);
-        const cellStatus = {isCellClicked:clicked[indexes],isCellFlagged:flagged[indexes],isCellMined=map[indexes]}
+        const cellStatus = {
+          isCellClicked: clicked[indexes],
+          isCellFlagged: flagged[indexes],
+          isCellMined: map[indexes]
+        };
+
         return (
           <div style={style} key={key}>
             <SingleCell
-              endGame={endGame}
               key={indexes}
-              id={indexes}
-              clicked={clicked[indexes]}
               clickCell={clickCell}
               reveal={reveal}
-              flagged={flagged[indexes]}
               toggleFlag={toggleFlag}
               countMinesAroundCell={neighbors[indexes]}
               indexes={indexes}
-              value={map[indexes]}
               superman={superman}
+              {...cellStatus}
             />
           </div>
         );
