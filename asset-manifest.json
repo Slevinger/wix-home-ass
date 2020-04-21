@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/wix-home-ass/static/css/main.c776006a.chunk.css",
-    "main.js": "/wix-home-ass/static/js/main.95c51327.chunk.js",
-    "main.js.map": "/wix-home-ass/static/js/main.95c51327.chunk.js.map",
+    "main.js": "/wix-home-ass/static/js/main.c4a13a9e.chunk.js",
+    "main.js.map": "/wix-home-ass/static/js/main.c4a13a9e.chunk.js.map",
     "runtime-main.js": "/wix-home-ass/static/js/runtime-main.ee3c55f5.js",
     "runtime-main.js.map": "/wix-home-ass/static/js/runtime-main.ee3c55f5.js.map",
-    "static/js/2.41a80bac.chunk.js": "/wix-home-ass/static/js/2.41a80bac.chunk.js",
-    "static/js/2.41a80bac.chunk.js.map": "/wix-home-ass/static/js/2.41a80bac.chunk.js.map",
+    "static/js/2.d29722af.chunk.js": "/wix-home-ass/static/js/2.d29722af.chunk.js",
+    "static/js/2.d29722af.chunk.js.map": "/wix-home-ass/static/js/2.d29722af.chunk.js.map",
     "index.html": "/wix-home-ass/index.html",
-    "precache-manifest.be38b5fab72eb17fce3793e0ad9ffad4.js": "/wix-home-ass/precache-manifest.be38b5fab72eb17fce3793e0ad9ffad4.js",
+    "precache-manifest.d11582e6e70f94a60e43460f66b8b251.js": "/wix-home-ass/precache-manifest.d11582e6e70f94a60e43460f66b8b251.js",
     "service-worker.js": "/wix-home-ass/service-worker.js",
     "static/css/main.c776006a.chunk.css.map": "/wix-home-ass/static/css/main.c776006a.chunk.css.map",
-    "static/js/2.41a80bac.chunk.js.LICENSE.txt": "/wix-home-ass/static/js/2.41a80bac.chunk.js.LICENSE.txt"
+    "static/js/2.d29722af.chunk.js.LICENSE.txt": "/wix-home-ass/static/js/2.d29722af.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ee3c55f5.js",
-    "static/js/2.41a80bac.chunk.js",
+    "static/js/2.d29722af.chunk.js",
     "static/css/main.c776006a.chunk.css",
-    "static/js/main.95c51327.chunk.js"
+    "static/js/main.c4a13a9e.chunk.js"
   ]
 }
