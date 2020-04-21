@@ -1,7 +1,9 @@
 import { useReducer } from "react";
-import Board from "./helpers/Board";
+import { createBoard } from "./helpers/Board";
+import { traverseFrom } from "../services/traverse-bfs";
 import pick from "lodash/pick";
 import difference from "lodash/difference";
+import { posToString } from "../services";
 
 const checkIsFinished = (state, additinalCells) => {
   const clicked = { ...state.clicked, ...additinalCells };
@@ -23,20 +25,13 @@ const reducer = (state, { type, payload }) => {
   switch (type) {
     case "clickCell":
       const { indexes: cellToClick } = payload;
-
-      addToState = checkIsFinished(state, { [cellToClick]: 1 });
-      return { ...state, ...addToState };
+      return { ...state, clicked: { ...state.clicked, [cellToClick]: 1 } };
     case "flagCell":
       const { indexes: cellToFlag } = payload;
-      const GAME_WON =
-        Object.keys({ ...state.flagged, [cellToFlag]: 1 }).filter(
-          key => state.mines[key]
-        ).length === state.countMines;
-      const status = GAME_WON ? { status: "WON" } : {};
+
       return {
         ...state,
-        ...status,
-        flagged: { ...state.flagged, [payload]: 1 }
+        flagged: { ...state.flagged, [cellToFlag]: 1 }
       };
     case "unFlagCell":
       const { indexes: cellToUnFlag } = payload;
@@ -60,12 +55,13 @@ const reducer = (state, { type, payload }) => {
       return { ...state, ...addToState };
     case "endGame":
       return { ...state, status: payload };
+    case "gemeWon":
+      debugger;
+      return { ...state, flagged: state.mines, status: "WON" };
     default:
       return state;
   }
 };
-
-const board = new Board();
 
 export default () => {
   const [state, dispatch] = useReducer(reducer, {
@@ -89,10 +85,28 @@ export default () => {
     }
 
     dispatch({ type: "clickCell", payload: { indexes } });
+    tryToWin({ [indexes]: 1 });
+  };
+
+  const tryToWin = additinalCells => {
+    debugger;
+    const clicked = { ...state.clicked, ...additinalCells };
+    const notClicked = Object.keys(state.map).filter(
+      indexes => !clicked[indexes]
+    );
+
+    if (
+      difference(notClicked, Object.keys(state.mines)).length === 0 ||
+      Object.keys(state.flagged).filter(indexes => state.mines[indexes])
+        .length === state.countMines
+    ) {
+      dispatch({ type: "gemeWon" });
+    }
   };
 
   const flagCell = indexes => {
     dispatch({ type: "flagCell", payload: { indexes } });
+    tryToWin();
   };
 
   const setSuperman = isSuperman => {
@@ -119,7 +133,7 @@ export default () => {
   };
 
   const reveal = (row, col) => {
-    const listOfCellsToReaveal = board.traverseFrom(row, col);
+    const listOfCellsToReaveal = traverseFrom(posToString(row, col), state);
     dispatch({
       type: "reveal",
       payload: { listOfCellsToReaveal }
@@ -127,7 +141,7 @@ export default () => {
   };
 
   const reset = async (rows, cols, countMines) => {
-    const newBoard = board.createBoard(rows, cols, countMines);
+    const newBoard = createBoard(rows, cols, countMines);
     await dispatch({
       type: "reset",
       payload: { ...newBoard, flagged: [] }

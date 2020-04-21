@@ -15,7 +15,6 @@ export default () => {
     <Main>
       <GameStatus {...boardHook.state} />
       <SettingsBox {...boardHook} />
-
       {board.length > 0 && <Board {...boardHook} />}
     </Main>
   );
