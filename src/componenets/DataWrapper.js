@@ -15,7 +15,7 @@ export default boardHook => {
       superman
     },
     toggleFlag,
-    clickCell,
+    addCellToClickedMap,
     reveal
   } = boardHook;
 
@@ -33,7 +33,7 @@ export default boardHook => {
           <div style={style} key={key}>
             <SingleCell
               key={indexes}
-              clickCell={clickCell}
+              addCellToClickedMap={addCellToClickedMap}
               reveal={reveal}
               toggleFlag={toggleFlag}
               countMinesAroundCell={neighbors[indexes]}

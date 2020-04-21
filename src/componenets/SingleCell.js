@@ -7,7 +7,7 @@ export default ({
   indexes,
   superman,
   toggleFlag,
-  clickCell,
+  addCellToClickedMap,
   isCellMined,
   isCellClicked,
   isCellFlagged,
@@ -52,7 +52,7 @@ export default ({
       toggleFlag(indexes);
     } else {
       if (!isCellClicked && !isCellFlagged) {
-        clickCell(indexes);
+        addCellToClickedMap(indexes);
       }
     }
   };
