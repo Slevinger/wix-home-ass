@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/Slevinger/wix-home-ass/static/css/main.c776006a.chunk.css",
-    "main.js": "/Slevinger/wix-home-ass/static/js/main.1aeb6773.chunk.js",
-    "main.js.map": "/Slevinger/wix-home-ass/static/js/main.1aeb6773.chunk.js.map",
-    "runtime-main.js": "/Slevinger/wix-home-ass/static/js/runtime-main.058f2371.js",
-    "runtime-main.js.map": "/Slevinger/wix-home-ass/static/js/runtime-main.058f2371.js.map",
-    "static/js/2.b4f394cf.chunk.js": "/Slevinger/wix-home-ass/static/js/2.b4f394cf.chunk.js",
-    "static/js/2.b4f394cf.chunk.js.map": "/Slevinger/wix-home-ass/static/js/2.b4f394cf.chunk.js.map",
-    "index.html": "/Slevinger/wix-home-ass/index.html",
-    "precache-manifest.0fe4283e0554a5c80359341ce4bf3bf5.js": "/Slevinger/wix-home-ass/precache-manifest.0fe4283e0554a5c80359341ce4bf3bf5.js",
-    "service-worker.js": "/Slevinger/wix-home-ass/service-worker.js",
-    "static/css/main.c776006a.chunk.css.map": "/Slevinger/wix-home-ass/static/css/main.c776006a.chunk.css.map",
-    "static/js/2.b4f394cf.chunk.js.LICENSE.txt": "/Slevinger/wix-home-ass/static/js/2.b4f394cf.chunk.js.LICENSE.txt"
+    "main.css": "/wix-home-ass/static/css/main.c776006a.chunk.css",
+    "main.js": "/wix-home-ass/static/js/main.8649419e.chunk.js",
+    "main.js.map": "/wix-home-ass/static/js/main.8649419e.chunk.js.map",
+    "runtime-main.js": "/wix-home-ass/static/js/runtime-main.ee3c55f5.js",
+    "runtime-main.js.map": "/wix-home-ass/static/js/runtime-main.ee3c55f5.js.map",
+    "static/js/2.53992b81.chunk.js": "/wix-home-ass/static/js/2.53992b81.chunk.js",
+    "static/js/2.53992b81.chunk.js.map": "/wix-home-ass/static/js/2.53992b81.chunk.js.map",
+    "index.html": "/wix-home-ass/index.html",
+    "precache-manifest.bac17d9e4d832783d15cbc0f4f2f170e.js": "/wix-home-ass/precache-manifest.bac17d9e4d832783d15cbc0f4f2f170e.js",
+    "service-worker.js": "/wix-home-ass/service-worker.js",
+    "static/css/main.c776006a.chunk.css.map": "/wix-home-ass/static/css/main.c776006a.chunk.css.map",
+    "static/js/2.53992b81.chunk.js.LICENSE.txt": "/wix-home-ass/static/js/2.53992b81.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.058f2371.js",
-    "static/js/2.b4f394cf.chunk.js",
+    "static/js/runtime-main.ee3c55f5.js",
+    "static/js/2.53992b81.chunk.js",
     "static/css/main.c776006a.chunk.css",
-    "static/js/main.1aeb6773.chunk.js"
+    "static/js/main.8649419e.chunk.js"
   ]
 }
