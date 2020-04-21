@@ -88,15 +88,18 @@ export default () => {
   };
 
   const reveal = (row, col) => {
-    const listOfCellsToReaveal = traverseFrom(posToString(row, col), state);
-    dispatch({
-      type: "reveal",
-      payload: { listOfCellsToReaveal }
-    });
-    _tryToWin({
-      addOrRemoveFromFlagsCount: 0,
-      additionalCells: listOfCellsToReaveal
-    });
+    if (!state.mines[posToString(row, col)]) {
+      const listOfCellsToReaveal = traverseFrom(posToString(row, col), state);
+      dispatch({
+        type: "reveal",
+        payload: { listOfCellsToReaveal }
+      });
+
+      _tryToWin({
+        addOrRemoveFromFlagsCount: 0,
+        additionalCells: listOfCellsToReaveal
+      });
+    }
   };
 
   const reset = async (rows, cols, countMines) => {

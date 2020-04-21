@@ -38,12 +38,16 @@ export const StyledCell = styled.div`
   line-height: ${CELL_WIDTH}px;
   text-align: center;
   border: solid thin black;
-  background-color: ${({ clicked, superman }) =>
-    clicked ? "white" : superman ? "rgba(0,40,40,0.1)" : "rgba(0,10,10,0.2)"};
+  background-color: ${({ isCellClicked, superman }) =>
+    isCellClicked
+      ? "white"
+      : superman
+      ? "rgba(0,40,40,0.1)"
+      : "rgba(0,10,10,0.2)"};
   &:hover {
     background-color: white;
-    ${({ clicked }) =>
-      !clicked
+    ${({ isCellClicked }) =>
+      !isCellClicked
         ? css`
             cursor: pointer;
           `
@@ -80,8 +84,12 @@ export const StyledBoardContainer = styled.div`
   max-width: ${BOARD_CONTAINER_WIDTH}px;
   max-height: ${BOARD_CONTAINER_HEIGHT}px;
   box-shadow: 1px 1px 10px 2px;
-
   overflow: auto;
+
+  @media (max-width: ${BOARD_CONTAINER_WIDTH}px) {
+    padding-bottom: 10px;
+    padding-right: 10px;
+  }
 `;
 
 export const Main = styled.div`
@@ -91,7 +99,7 @@ export const Main = styled.div`
     justify-self: center;
     align-self: center;
     width: 100%;
-    padding: 10px;
+
     font-size: 23px;
     z-index: 10;
 
