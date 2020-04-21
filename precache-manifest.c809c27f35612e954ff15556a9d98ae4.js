@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d071048472ff5761c79f861e13f3679b",
+    "revision": "fc1e04a56c3035f6dd91f6539c7e343f",
     "url": "/wix-home-ass/index.html"
   },
   {
-    "revision": "2fc3e8e27e0b84e95c69",
+    "revision": "d197cd6f1de9f1d688c4",
     "url": "/wix-home-ass/static/css/main.c776006a.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/wix-home-ass/static/js/2.53992b81.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2fc3e8e27e0b84e95c69",
-    "url": "/wix-home-ass/static/js/main.8649419e.chunk.js"
+    "revision": "d197cd6f1de9f1d688c4",
+    "url": "/wix-home-ass/static/js/main.cc4ea521.chunk.js"
   },
   {
     "revision": "9cebf33bc58146f3c25b",

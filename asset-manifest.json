@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/wix-home-ass/static/css/main.c776006a.chunk.css",
-    "main.js": "/wix-home-ass/static/js/main.8649419e.chunk.js",
-    "main.js.map": "/wix-home-ass/static/js/main.8649419e.chunk.js.map",
+    "main.js": "/wix-home-ass/static/js/main.cc4ea521.chunk.js",
+    "main.js.map": "/wix-home-ass/static/js/main.cc4ea521.chunk.js.map",
     "runtime-main.js": "/wix-home-ass/static/js/runtime-main.ee3c55f5.js",
     "runtime-main.js.map": "/wix-home-ass/static/js/runtime-main.ee3c55f5.js.map",
     "static/js/2.53992b81.chunk.js": "/wix-home-ass/static/js/2.53992b81.chunk.js",
     "static/js/2.53992b81.chunk.js.map": "/wix-home-ass/static/js/2.53992b81.chunk.js.map",
     "index.html": "/wix-home-ass/index.html",
-    "precache-manifest.bac17d9e4d832783d15cbc0f4f2f170e.js": "/wix-home-ass/precache-manifest.bac17d9e4d832783d15cbc0f4f2f170e.js",
+    "precache-manifest.c809c27f35612e954ff15556a9d98ae4.js": "/wix-home-ass/precache-manifest.c809c27f35612e954ff15556a9d98ae4.js",
     "service-worker.js": "/wix-home-ass/service-worker.js",
     "static/css/main.c776006a.chunk.css.map": "/wix-home-ass/static/css/main.c776006a.chunk.css.map",
     "static/js/2.53992b81.chunk.js.LICENSE.txt": "/wix-home-ass/static/js/2.53992b81.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.ee3c55f5.js",
     "static/js/2.53992b81.chunk.js",
     "static/css/main.c776006a.chunk.css",
-    "static/js/main.8649419e.chunk.js"
+    "static/js/main.cc4ea521.chunk.js"
   ]
 }
