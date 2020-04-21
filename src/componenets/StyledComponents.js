@@ -48,6 +48,14 @@ export const StyledCell = styled.div`
           `
         : ""}
   }
+  .fail-icon {
+    position: absolute;
+    left: -7px;
+    color: red;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+  }
 `;
 
 export const StyledBoard = styled.div`
@@ -77,7 +85,7 @@ export const StyledBoardContainer = styled.div`
 `;
 
 export const Main = styled.div`
-  .game-status {
+  .game-status-container {
     text-align: center;
     justify-self: center;
     align-self: center;
@@ -87,12 +95,21 @@ export const Main = styled.div`
     font-size: 23px;
     z-index: 10;
 
-    .WON {
-      color: green;
-    }
+    .game-status {
+      background-color: rgba(255, 255, 255, 0.4);
+      display: inline-flex;
 
-    .LOSE {
-      color: red;
+      .GAME_ON {
+        color: blue;
+      }
+
+      .WON {
+        color: green;
+      }
+
+      .LOSE {
+        color: red;
+      }
     }
   }
 `;

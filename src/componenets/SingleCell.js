@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { StyledCell } from "./StyledComponents";
 import { FaBomb, FaFlag } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
 export default ({
   indexes,
   value,
@@ -21,7 +22,18 @@ export default ({
     } else {
       if (superman || clicked) {
         if (value) {
-          return <FaBomb />;
+          return (
+            <span style={{ display: "inline-block", position: "relative" }}>
+              <FaBomb textAnchor="middle" alignmentBaseline="middle" />
+              {clicked && value && (
+                <IoMdClose
+                  textAnchor="middle"
+                  className={"fail-icon"}
+                  alignmentBaseline="middle"
+                />
+              )}
+            </span>
+          );
         } else {
           if (count > 0) {
             return count;
