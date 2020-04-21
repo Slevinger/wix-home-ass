@@ -15,7 +15,6 @@ export const traverseFrom = (startIndexes, state) => {
     const indexes = queue.pop();
 
     const immediateNeighbors = getListOfNeighbors(indexes, width, height);
-
     for (let i = 0; i < immediateNeighbors.length; i++) {
       const [row, col] = immediateNeighbors[i];
       const strIndexes = posToString(row, col);

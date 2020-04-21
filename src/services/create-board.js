@@ -1,5 +1,9 @@
-import { countMinesAroundCell } from "./get-list-of-neighbors";
+import {
+  countMinesAroundCell,
+  getListOfNeighbors
+} from "./get-list-of-neighbors";
 import { posToString } from ".";
+import { resolve } from "q";
 
 export const createBoard = (rows, cols, countMines) => {
   const map = {}; // a map from cell indexes to its value, (1|0  mine|no mine)  {'row:*,col:*':0|1}
@@ -24,13 +28,14 @@ export const createBoard = (rows, cols, countMines) => {
   }
 
   // neighbors : a map from cell indexes to the count of mines around it
-  const neighbors = Object.keys(map).reduce(
-    (acc, indexesStr) => ({
-      ...acc,
-      [indexesStr]: countMinesAroundCell(indexesStr, rows, cols, map)
-    }),
-    {}
-  );
+  const neighbors = {};
+  Object.keys(mines).forEach(indexesStr => {
+    const mineNeigbors = getListOfNeighbors(indexesStr, rows, cols);
+    mineNeigbors.forEach(([row, col]) => {
+      neighbors[posToString(row, col)] =
+        (neighbors[posToString(row, col)] || 0) + 1;
+    });
+  });
 
   return {
     countMines,

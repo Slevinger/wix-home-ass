@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Input from "./Input";
 import { SettingsBoxContainer } from "./StyledComponents";
-import Spinner from "react-bootstrap/Spinner";
 
 export default ({
   state: { superman },
+  setLoading,
   setSuperman,
-  createBoard,
-  setLoading
+  createBoard
 }) => {
-  const [cols, setCols] = useState(40);
-  const [rows, setRows] = useState(40);
+  const [cols, setCols] = useState(20);
+  const [rows, setRows] = useState(20);
   const [mines, setMines] = useState(12);
   useEffect(() => {
     createBoard(rows, cols, mines);
@@ -18,21 +17,21 @@ export default ({
   return (
     <SettingsBoxContainer>
       <Input
-        label="width"
+        label="Col Count"
         value={cols}
         onChange={e => {
           setCols(Number(e.target.value));
         }}
       />
       <Input
-        label="height"
+        label="Row Count"
         value={rows}
         onChange={e => {
           setRows(Number(e.target.value));
         }}
       />
       <Input
-        label="mines"
+        label="Mines"
         value={mines}
         onChange={e => {
           setMines(Number(e.target.value));
@@ -40,7 +39,7 @@ export default ({
       />
       <Input
         label="SUPERMAN"
-        value={superman}
+        checked={superman}
         type="checkbox"
         style={{ transform: "scale(2)" }}
         onChange={e => {

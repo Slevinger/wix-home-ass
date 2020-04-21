@@ -45,7 +45,6 @@ export default ({
   }, [clicked, superman, value, count, flagged]);
 
   const onClick = async e => {
-    debugger;
     if (e.altKey) {
       toggleFlag(indexes);
     } else {

@@ -1,5 +1,18 @@
 import pick from "lodash/pick";
 
+export const initialState = {
+  neighbors: {},
+  flagged: {},
+  map: {},
+  mines: {},
+  board: [],
+  clicked: {},
+  status: "NOT READY",
+  superman: false,
+  flaggedMinesCount: 0,
+  countFlags: 0
+};
+
 export const reducer = (state, { type, payload }) => {
   switch (type) {
     case "clickCell":
@@ -10,13 +23,25 @@ export const reducer = (state, { type, payload }) => {
       const { indexes: cellToFlag } = payload;
       return {
         ...state,
+        countFlags: state.countFlags + 1,
         flagged: { ...state.flagged, [cellToFlag]: 1 }
+      };
+    case "decFlaggedMinesCount":
+      return {
+        ...state,
+        flaggedMinesCount: state.flaggedMinesCount - 1
+      };
+    case "incFlaggedMinesCount":
+      return {
+        ...state,
+        flaggedMinesCount: state.flaggedMinesCount + 1
       };
 
     case "unFlagCell":
       const { indexes: cellToUnFlag } = payload;
       return {
         ...state,
+        countFlags: state.countFlags - 1,
         flagged: pick(
           state.flagged,
           Object.keys(state.flagged).filter(key => key !== cellToUnFlag)
@@ -24,7 +49,7 @@ export const reducer = (state, { type, payload }) => {
       };
     case "reset":
       const newBoard = payload;
-      return { ...state, superman: false, ...newBoard };
+      return { ...initialState, ...newBoard };
     case "setSuperman":
       const { isSuperman } = payload;
       return { ...state, superman: isSuperman };
@@ -34,9 +59,7 @@ export const reducer = (state, { type, payload }) => {
         ...state,
         clicked: { ...state.clicked, ...listOfCellsToReaveal }
       };
-    case "setLoading":
-      const { isLoading } = payload;
-      return { ...state, loading: isLoading };
+
     case "endGame":
       const { status } = payload;
       return { ...state, superman: true, status };

@@ -79,6 +79,8 @@ export const StyledBoard = styled.div`
 export const StyledBoardContainer = styled.div`
   max-width: ${BOARD_CONTAINER_WIDTH}px;
   max-height: ${BOARD_CONTAINER_HEIGHT}px;
+  box-shadow: 1px 1px 10px 2px;
+
   overflow: auto;
 `;
 
@@ -96,7 +98,6 @@ export const Main = styled.div`
     .game-status {
       background-color: rgba(255, 255, 255, 0.4);
       display: inline-flex;
-      position: fixed;
 
       .GAME_ON {
         color: blue;
