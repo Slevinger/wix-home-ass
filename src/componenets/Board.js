@@ -3,7 +3,6 @@ import { StyledBoard, StyledBoardContainer } from "./StyledComponents";
 import SingleCell from "./SingleCell";
 import Loading from "./Loading";
 import { Grid } from "react-virtualized";
-import AutoSizer from "react-virtualized/dist/commonjs/AutoSizer";
 import { posToString } from "../services/index";
 export default ({
   state: {
@@ -20,7 +19,6 @@ export default ({
     superman
   },
   loading,
-  endGame,
   toggleFlag,
   clickCell,
   reveal
@@ -42,21 +40,23 @@ export default ({
           <Grid
             cellRenderer={({ columnIndex, key, rowIndex, style }) => {
               const indexes = posToString(rowIndex, columnIndex);
+              const cellStatus = {
+                isCellClicked: clicked[indexes],
+                isCellFlagged: flagged[indexes],
+                isCellMined: map[indexes]
+              };
+
               return (
                 <div style={style} key={key}>
                   <SingleCell
-                    endGame={endGame}
                     key={indexes}
-                    id={indexes}
-                    clicked={clicked[indexes]}
                     clickCell={clickCell}
                     reveal={reveal}
-                    flagged={flagged[indexes]}
                     toggleFlag={toggleFlag}
-                    count={neighbors[indexes]}
+                    countMinesAroundCell={neighbors[indexes]}
                     indexes={indexes}
-                    value={map[indexes]}
                     superman={superman}
+                    {...cellStatus}
                   />
                 </div>
               );

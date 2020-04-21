@@ -2,30 +2,27 @@ import React, { useMemo } from "react";
 import { StyledCell } from "./StyledComponents";
 import { FaBomb, FaFlag } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+
 export default ({
   indexes,
-  value,
-  id,
-  count,
   superman,
-  reveal,
-  clicked,
-  flagged,
-  clickCell,
   toggleFlag,
-  endGame
+  clickCell,
+  isCellMined,
+  isCellClicked,
+  isCellFlagged,
+  countMinesAroundCell
 }) => {
-  // const [clicked, setClicked] = useState(false);
   const cellValue = useMemo(() => {
-    if (flagged) {
+    if (isCellFlagged) {
       return <FaFlag color="red" />;
     } else {
-      if (superman || clicked) {
-        if (value) {
+      if (superman || isCellClicked) {
+        if (isCellMined) {
           return (
             <span style={{ display: "inline-block", position: "relative" }}>
               <FaBomb textAnchor="middle" alignmentBaseline="middle" />
-              {clicked && value && (
+              {isCellClicked && isCellMined && (
                 <IoMdClose
                   textAnchor="middle"
                   className={"fail-icon"}
@@ -35,20 +32,26 @@ export default ({
             </span>
           );
         } else {
-          if (count > 0) {
-            return count;
+          if (countMinesAroundCell > 0) {
+            return countMinesAroundCell;
           }
           return "";
         }
       }
     }
-  }, [clicked, superman, value, count, flagged]);
+  }, [
+    isCellClicked,
+    superman,
+    isCellMined,
+    countMinesAroundCell,
+    isCellFlagged
+  ]);
 
   const onClick = async e => {
     if (e.altKey) {
       toggleFlag(indexes);
     } else {
-      if (!clicked && !flagged) {
+      if (!isCellClicked && !isCellFlagged) {
         clickCell(indexes);
       }
     }
@@ -57,8 +60,7 @@ export default ({
   return (
     <StyledCell
       onClick={onClick}
-      clicked={clicked}
-      id={id}
+      isCellClicked={isCellClicked}
       indexes={indexes}
       superman={superman}
     >
