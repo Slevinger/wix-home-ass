@@ -17,6 +17,7 @@ export const SettingsBoxContainer = styled.div`
 export const Input = styled.input`
   padding: 5px;
   font-size: 15px;
+  width: 30px;
   margin-left: 10px;
 `;
 
@@ -82,12 +83,13 @@ export const StyledBoardContainer = styled.div`
 `;
 
 export const Main = styled.div`
+  width: 100%;
   .game-status-container {
     text-align: center;
     justify-self: center;
     align-self: center;
     width: 100%;
-    padding: 10;
+    padding: 10px;
     font-size: 23px;
     z-index: 10;
 

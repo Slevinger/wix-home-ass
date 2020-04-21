@@ -14,7 +14,8 @@ export default () => {
     board: [],
     clicked: {},
     status: "NOT READY",
-    superman: false
+    superman: false,
+    loading: false
   });
 
   const _tryToWin = additinalCells => {
@@ -49,6 +50,11 @@ export default () => {
   const setSuperman = isSuperman => {
     debugger;
     dispatch({ type: "setSuperman", payload: { isSuperman } });
+  };
+
+  const setLoading = isLoading => {
+    debugger;
+    dispatch({ type: "setLoading", payload: { isLoading } });
   };
 
   const endGame = status => {
@@ -94,6 +100,7 @@ export default () => {
   return {
     state,
     clickCell,
+    setLoading,
     setSuperman,
     endGame,
     toggleFlag,

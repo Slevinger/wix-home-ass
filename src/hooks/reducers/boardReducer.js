@@ -34,6 +34,9 @@ export const reducer = (state, { type, payload }) => {
         ...state,
         clicked: { ...state.clicked, ...listOfCellsToReaveal }
       };
+    case "setLoading":
+      const { isLoading } = payload;
+      return { ...state, loading: isLoading };
     case "endGame":
       const { status } = payload;
       return { ...state, superman: true, status };

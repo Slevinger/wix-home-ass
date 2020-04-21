@@ -3,8 +3,12 @@ import Input from "./Input";
 import { SettingsBoxContainer } from "./StyledComponents";
 import Spinner from "react-bootstrap/Spinner";
 
-export default ({ state: { superman }, setSuperman, createBoard }) => {
-  const [thinking, setThinking] = useState(false);
+export default ({
+  state: { superman },
+  setSuperman,
+  createBoard,
+  setLoading
+}) => {
   const [cols, setCols] = useState(40);
   const [rows, setRows] = useState(40);
   const [mines, setMines] = useState(12);
@@ -45,20 +49,15 @@ export default ({ state: { superman }, setSuperman, createBoard }) => {
       />
       <button
         onClick={async () => {
-          await setThinking(true);
+          await setLoading(true);
           setTimeout(async () => {
             await createBoard(rows, cols, mines);
-            setThinking(false);
+            setLoading(false);
           }, 0);
         }}
       >
         New Game
       </button>
-      {thinking && (
-        <Spinner animation="border" size="sm" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
-      )}
     </SettingsBoxContainer>
   );
 };

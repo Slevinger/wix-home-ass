@@ -1,6 +1,7 @@
 import React from "react";
 import { StyledBoard, StyledBoardContainer } from "./StyledComponents";
 import SingleCell from "./SingleCell";
+import Spinner from "react-bootstrap/Spinner";
 
 export default ({
   state: {
@@ -11,7 +12,8 @@ export default ({
     neighbors,
     flagged,
     status,
-    superman
+    superman,
+    loading
   },
   endGame,
   toggleFlag,
@@ -25,7 +27,11 @@ export default ({
         {minesLeft === 0 && status !== "WON" && (
           <div style={{ color: "red" }}>No More Flags</div>
         )}
-
+        {loading && (
+          <Spinner animation="border" size="sm" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        )}
         <StyledBoard
           status={status}
           countCols={board[0].length}
