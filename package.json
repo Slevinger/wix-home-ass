@@ -2,6 +2,7 @@
   "name": "wix-home-assignment",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/Slevinger/wix-home-ass/",
   "engines": {
     "node": "13.11.x"
   },
