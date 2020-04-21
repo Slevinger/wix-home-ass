@@ -1,41 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from "./Input";
 import { SettingsBoxContainer } from "./StyledComponents";
 import Spinner from "react-bootstrap/Spinner";
-export default ({
-  countCols,
-  setCountCols,
-  countRows,
-  setCountRows,
-  countMines,
-  setCountMines,
-  superman,
-  setSuperman,
-  createBoard
-}) => {
-  const [thinking, setThinking] = useState(false);
 
+export default ({ state: { superman }, setSuperman, createBoard }) => {
+  const [thinking, setThinking] = useState(false);
+  const [cols, setCols] = useState(10);
+  const [rows, setRows] = useState(10);
+  const [mines, setMines] = useState(12);
+  debugger;
+  useEffect(() => {
+    createBoard(rows, cols, mines);
+  }, []);
   return (
     <SettingsBoxContainer>
       <Input
         label="width"
-        value={countCols}
+        value={cols}
         onChange={e => {
-          setCountCols(Number(e.target.value));
+          setCols(Number(e.target.value));
         }}
       />
       <Input
         label="height"
-        value={countRows}
+        value={rows}
         onChange={e => {
-          setCountRows(Number(e.target.value));
+          setRows(Number(e.target.value));
         }}
       />
       <Input
         label="mines"
-        value={countMines}
+        value={mines}
         onChange={e => {
-          setCountMines(Number(e.target.value));
+          setMines(Number(e.target.value));
         }}
       />
       <Input
@@ -51,7 +48,7 @@ export default ({
         onClick={async () => {
           await setThinking(true);
           setTimeout(async () => {
-            await createBoard(countRows, countCols, countMines);
+            await createBoard(rows, cols, mines);
             setThinking(false);
           }, 0);
         }}

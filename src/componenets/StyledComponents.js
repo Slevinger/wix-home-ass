@@ -75,3 +75,24 @@ export const StyledBoardContainer = styled.div`
   overflow: auto;
   box-shadow: -5px -5px 5px;
 `;
+
+export const Main = styled.div`
+  .game-status {
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+    position: fixed;
+    width: 100%;
+    padding: 10;
+    font-size: 23px;
+    z-index: 10;
+
+    .WON {
+      color: green;
+    }
+
+    .LOSE {
+      color: red;
+    }
+  }
+`;

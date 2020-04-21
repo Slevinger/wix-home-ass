@@ -3,11 +3,19 @@ import { StyledBoard, StyledBoardContainer } from "./StyledComponents";
 import SingleCell from "./SingleCell";
 
 export default ({
-  state: { map, countMines, board, clicked, neighbors, flagged, status },
+  state: {
+    map,
+    countMines,
+    board,
+    clicked,
+    neighbors,
+    flagged,
+    status,
+    superman
+  },
   endGame,
   toggleFlag,
   clickCell,
-  superman,
   reveal
 }) => {
   const minesLeft = countMines - (Object.keys(flagged).length || 0);

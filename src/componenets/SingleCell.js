@@ -37,13 +37,7 @@ export default ({
       toggleFlag(indexes);
     } else {
       if (!clicked && !flagged) {
-        if (value) {
-          endGame("LOSE");
-        }
         clickCell(indexes);
-        if (count === 0 && e !== false) {
-          reveal(indexes);
-        }
       }
     }
   };

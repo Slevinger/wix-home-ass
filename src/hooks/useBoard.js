@@ -19,13 +19,17 @@ const checkIsFinished = (state, additinalCells) => {
 
 const reducer = (state, { type, payload }) => {
   let addToState;
+  debugger;
   switch (type) {
     case "clickCell":
-      addToState = checkIsFinished(state, { [payload]: 1 });
+      const { indexes: cellToClick } = payload;
+
+      addToState = checkIsFinished(state, { [cellToClick]: 1 });
       return { ...state, ...addToState };
     case "flagCell":
+      const { indexes: cellToFlag } = payload;
       const GAME_WON =
-        Object.keys({ ...state.flagged, [payload]: 1 }).filter(
+        Object.keys({ ...state.flagged, [cellToFlag]: 1 }).filter(
           key => state.mines[key]
         ).length === state.countMines;
       const status = GAME_WON ? { status: "WON" } : {};
@@ -35,17 +39,24 @@ const reducer = (state, { type, payload }) => {
         flagged: { ...state.flagged, [payload]: 1 }
       };
     case "unFlagCell":
+      const { indexes: cellToUnFlag } = payload;
       return {
         ...state,
         flagged: pick(
           state.flagged,
-          Object.keys(state.flagged).filter(key => key !== payload)
+          Object.keys(state.flagged).filter(key => key !== cellToUnFlag)
         )
       };
     case "reset":
-      return payload;
+      const newBoard = payload;
+      return { ...state, ...newBoard };
+    case "setSuperman":
+      debugger;
+      const { isSuperman } = payload;
+      return { ...state, superman: isSuperman };
     case "reveal":
-      addToState = checkIsFinished(state, payload);
+      const { listOfCellsToReaveal } = payload;
+      addToState = checkIsFinished(state, listOfCellsToReaveal);
       return { ...state, ...addToState };
     case "endGame":
       return { ...state, status: payload };
@@ -64,22 +75,37 @@ export default () => {
     mines: {},
     board: [],
     clicked: {},
-    boaredRefs: {}
+    superman: false
   });
 
   const clickCell = indexes => {
-    dispatch({ type: "clickCell", payload: indexes });
+    debugger;
+    if (state.map[indexes]) {
+      endGame("LOSE");
+    }
+
+    if (state.neighbors[indexes] === 0) {
+      reveal(indexes);
+    }
+
+    dispatch({ type: "clickCell", payload: { indexes } });
   };
 
   const flagCell = indexes => {
-    dispatch({ type: "flagCell", payload: indexes });
+    dispatch({ type: "flagCell", payload: { indexes } });
   };
+
+  const setSuperman = isSuperman => {
+    debugger;
+    dispatch({ type: "setSuperman", payload: { isSuperman } });
+  };
+
   const unFlagCell = indexes => {
-    dispatch({ type: "unFlagCell", payload: indexes });
+    dispatch({ type: "unFlagCell", payload: { indexes } });
   };
 
   const endGame = status => {
-    dispatch({ type: "endGame", payload: status });
+    dispatch({ type: "endGame", payload: { status } });
   };
 
   const toggleFlag = indexes => {
@@ -93,10 +119,10 @@ export default () => {
   };
 
   const reveal = (row, col) => {
-    const list = board.traverseFrom(row, col);
+    const listOfCellsToReaveal = board.traverseFrom(row, col);
     dispatch({
       type: "reveal",
-      payload: list
+      payload: { listOfCellsToReaveal }
     });
   };
 
@@ -114,6 +140,7 @@ export default () => {
     toggleFlag,
     reveal,
     endGame,
+    setSuperman,
     createBoard: reset
   };
 };
