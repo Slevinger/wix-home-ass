@@ -1,28 +1,13 @@
 import React from "react";
 import { StyledBoard, StyledBoardContainer } from "./StyledComponents";
-import SingleCell from "./SingleCell";
 import Loading from "./Loading";
-import { Grid } from "react-virtualized";
-import { posToString } from "../services/index";
-export default ({
-  state: {
-    map,
-    height: numRows,
-    width: numColumns,
-    countMines,
-    countFlags,
-    board,
-    clicked,
-    neighbors,
-    flagged,
-    status,
-    superman
-  },
-  loading,
-  toggleFlag,
-  clickCell,
-  reveal
-}) => {
+import DataWrapper from "./DataWrapper";
+
+export default boardHook => {
+  const {
+    state: { countMines, countFlags, board, status },
+    loading
+  } = boardHook;
   const minesLeft = countMines - countFlags;
   return (
     <div className="board-page">
@@ -37,39 +22,7 @@ export default ({
           countCols={board[0].length}
           countRows={board.length}
         >
-          <Grid
-            cellRenderer={({ columnIndex, key, rowIndex, style }) => {
-              const indexes = posToString(rowIndex, columnIndex);
-              const cellStatus = {
-                isCellClicked: clicked[indexes],
-                isCellFlagged: flagged[indexes],
-                isCellMined: map[indexes]
-              };
-
-              return (
-                <div style={style} key={key}>
-                  <SingleCell
-                    key={indexes}
-                    clickCell={clickCell}
-                    reveal={reveal}
-                    toggleFlag={toggleFlag}
-                    countMinesAroundCell={neighbors[indexes]}
-                    indexes={indexes}
-                    superman={superman}
-                    {...cellStatus}
-                  />
-                </div>
-              );
-            }}
-            columnCount={numColumns}
-            columnWidth={30}
-            height={600}
-            overscanColumnCount={numColumns / 10}
-            overscanRowCount={numRows / 10}
-            rowCount={numRows}
-            rowHeight={30}
-            width={800}
-          />
+          <DataWrapper {...boardHook} />
         </StyledBoard>
       </StyledBoardContainer>
     </div>
